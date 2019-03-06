@@ -8,6 +8,8 @@ task :generate do
     @city = File.basename(containing_folder).gsub("-", " ").split.map(&:capitalize).join(' ')
     puts "Generating #{@city}"
 
+    @country_code = File.read(File.join(containing_folder, "country-code.txt"))
+
     url = "https://www.mapquestapi.com/staticmap/v4/getplacemap?"
     url += "key=#{ENV['MAPQUEST_CONSUMER_KEY']}"
     url += "&location=#{@city}"
