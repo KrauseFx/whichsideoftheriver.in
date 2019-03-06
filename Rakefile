@@ -9,6 +9,7 @@ task :generate do
     puts "Generating #{@city}"
 
     @country_code = File.read(File.join(containing_folder, "country-code.txt"))
+    @side = File.read(File.join(containing_folder, "side.txt")).split("-").map(&:capitalize).join('-')
 
     url = "https://www.mapquestapi.com/staticmap/v4/getplacemap?"
     url += "key=#{ENV['MAPQUEST_CONSUMER_KEY']}"
@@ -17,7 +18,6 @@ task :generate do
     url += "&type=map&zoom=12&imagetype=jpg&scalebar=false"
 
     @maps_url = url
-    @side = "West"
 
     renderer = ERB.new(File.read("template.html.erb"))
     output_path = File.join(containing_folder, "index.html")
